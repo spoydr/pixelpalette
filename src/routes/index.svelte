@@ -9,7 +9,6 @@
 
     // shuffle the array of paintings in a random order
     let shuffledPaintings = shuffle([...paintingsData]);
-    console.log(shuffledPaintings);
 
     // take the first 4 of the shuffled paintings as answer options
     let chosenPaintings = [...(shuffledPaintings.slice(0,4))];
@@ -67,7 +66,7 @@
         }
         paintingPromptPath = revealedPaintingPath;
     }
-    
+
 </script>
 
 <div class="index flex flex-col items-center justify-between h-screen">
