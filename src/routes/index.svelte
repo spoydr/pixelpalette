@@ -69,25 +69,29 @@
 
 </script>
 
-<div class="index flex flex-col items-center justify-between h-screen">
-    <h1 class="text-3xl md:text-5xl pt-6 font-bold">👾🎨 PixelPalette 0.1</h1>
+<div class="index flex flex-col items-center h-screen ">
+    <div class="header h-[8%] md:h-[15%] w-full flex items-center justify-center">
+        <h1 class="text-2xl md:text-5xl font-bold text-center">👾🎨 PixelPalette 0.1</h1>
+    </div>
     
-    <Scoreboard/>
 
-    <div class="painting-prompt sm:h-2/5">
+    <div class="painting-prompt max-h-xl h-2/5 sm:h-2/5 bg-black w-full sm:w-auto p-4 justify-center flex ">
         {#if $revealState}
-            <img in:fade src="{paintingPromptPath}" alt="{paintingPromptPath}" class="max-w-screen max-h-full md:h-full ">
+            <img src="{paintingPromptPath}" alt="{paintingPromptPath}" class="max-w-screen max-h-full md:h-full ">
         {:else}
-            <img in:scale src="{paintingPromptPath}" alt="{paintingPromptPath}" class="max-w-screen max-h-full md:h-full ">
+            <img src="{paintingPromptPath}" alt="{paintingPromptPath}" class="max-w-screen max-h-full md:h-full ">
         {/if}
     </div>
-    {#if $revealState}
-        <button in:scale on:click={newPrompt} class='bg-yellow-200 hover:bg-yellow-400 text-sm md:text-base border-2 border-black px-4 py-2'>♻️ Next Painting</button>
-    {:else}
-        <button disabled in:fade class='bg-gray-200 text-sm md:text-base px-4 py-2'>👨🏽‍🎨 Can you guess what artwork hides behind these pixels?</button>
-    {/if}
+    <div class="flex flex-row justify-evenly w-full h-[7%] py-2 sm:max-w-screen-md">
+        {#if $revealState}
+                <Scoreboard/>
+                <button in:scale on:click={newPrompt} class='bg-yellow-200 hover:bg-yellow-400 text-xs md:text-base border-2 border-black px-4 py-2'>♻️ Next Painting</button>   
+        {:else}
+            <button disabled in:slide class='bg-white text-gray-500 text-xs md:text-base px-4 py-2'>👨🏽‍🎨 Guess the artwork hidden behind the pixels!</button>
+        {/if}
+    </div>
 
-    <div class="answer-buttons flex flex-col space-y-4 pb-6">
+    <div class="answer-buttons h-[40%] flex flex-col space-y-2 md:space-y-4 pb-4 md:pb-6">
         {#each scrambledAnswers as guessOption}
             <Guessbutton scrambledAnswer={guessOption} on:click={guessHandler(guessOption)}/>
         {/each}

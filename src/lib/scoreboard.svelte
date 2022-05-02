@@ -8,4 +8,4 @@
     });
 </script>
 
-<h2 class="text-sm font-sans uppercase font-black bg-gray-700 px-4 py-2 text-green-300">Win streak: {scoreValue} </h2>
+<h2 class="text-sm font-sans uppercase font-black bg-gray-700 px-4 py-2 text-green-300 flex items-center">Win streak: {scoreValue} </h2>
