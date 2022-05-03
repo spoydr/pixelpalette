@@ -26,9 +26,16 @@
     activePrompt.set(currentPrompt);
 
     const newPrompt = () => {
-        shuffledPaintings = shuffle([...shuffledPaintings]);
-
-        chosenPaintings = [...(shuffledPaintings.slice(0,4))];
+        if(shuffledPaintings.length > 4) {
+            shuffledPaintings.shift();
+            shuffledPaintings = shuffle([...shuffledPaintings]);
+            chosenPaintings = [...(shuffledPaintings.slice(0,4))];
+        }
+        else {
+            shuffledPaintings = shuffle([...paintingsData]);
+            chosenPaintings = [...(shuffledPaintings.slice(0,4))];
+            console.log('reset succes!')
+        }
         correctAnswer = chosenPaintings[0];
         scrambledAnswers = shuffle([...chosenPaintings]);
         paintingPromptPath = `./img/pixelated_full/${correctAnswer.id}.jpeg`;
@@ -50,8 +57,8 @@
 
     let correctAnswer = $activePrompt.correctAnswer;
 
-    $: paintingPromptPath = `./img/pixelated_full/${correctAnswer.id}.jpeg`;
-    $: revealedPaintingPath = `./img/${correctAnswer.id}.jpeg`;
+    $: paintingPromptPath = `./img/pixelated_full/${correctAnswer.id}.jpg`;
+    $: revealedPaintingPath = `./img/${correctAnswer.id}.jpg`;
 
     // GUESS HANDLER LOGIC
     const guessHandler = (pickedGuess) => {
