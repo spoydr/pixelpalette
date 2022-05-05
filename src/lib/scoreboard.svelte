@@ -1,5 +1,7 @@
 <script>
 	import { score } from '../stores.js';
+    import { fly } from 'svelte/transition';
+
 
     let scoreValue;
 
@@ -8,4 +10,9 @@
     });
 </script>
 
-<h2 class="text-sm font-sans uppercase font-black bg-neutral-600 px-4 py-2 text-green-300 flex items-center">Score: {scoreValue} </h2>
+{#key scoreValue}
+    <div class="text-sm font-sans text-white flex flex-row justify-between w-[25%] md:w-[12%]">
+        <span class="font-bold pr-2">Score:</span>
+        <div in:fly={{ y: -20 }}>{scoreValue}</div>
+    </div>
+{/key}

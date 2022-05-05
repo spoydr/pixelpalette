@@ -26,13 +26,13 @@
 </script>
 
 {#if !$revealState}
-    <button class="border-2 border-black px-4 py-2 hover:bg-yellow-200 bg-white text-xs md:text-base sm:flex sm:justify-between sm:space-x-4" on:click on:click={activateRevealState}>
-        <span class="font-bold">{scrambledAnswer.title}</span>
-        <span class="text-gray-500">by {scrambledAnswer.artistFirstName} {scrambledAnswer.artistLastName} ({scrambledAnswer.year})</span>
+    <button class="drop-shadow-md h-[20%] flex flex-col justify-center px-4 w-full md:max-w-md hover:bg-yellow-200 bg-white text-xs md:text-sm " on:click on:click={activateRevealState}>
+        <span class="font-bold">{scrambledAnswer.artistFirstName} {scrambledAnswer.artistLastName}</span>
+        <span class="text-left">{scrambledAnswer.title}, {scrambledAnswer.year}</span>
     </button>
 {:else}
-    <button disabled class="border-2 border-black px-4 py-2 text-xs md:text-base sm:flex sm:justify-between sm:space-x-4 {buttonColor}">
-        <span class="font-bold">{scrambledAnswer.title}</span>
-        <span class="text-gray-500">by {scrambledAnswer.artistFirstName} {scrambledAnswer.artistLastName} ({scrambledAnswer.year})</span>
+    <button disabled class="drop-shadow-md h-[20%] flex flex-col justify-center px-4 w-full md:max-w-md text-xs md:text-sm {buttonColor}">
+        <span class="font-bold">{scrambledAnswer.artistFirstName} {scrambledAnswer.artistLastName}</span>
+        <span class="text-left">{scrambledAnswer.title}, {scrambledAnswer.year}</span>
     </button>
 {/if}
