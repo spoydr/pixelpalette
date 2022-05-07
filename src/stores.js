@@ -1,6 +1,7 @@
 import { writable } from 'svelte/store';
 
 export let score = writable(0);
+export let highScore = writable(0);
 
 export function shuffle(arr = []) {
         const array = arr;
@@ -13,3 +14,4 @@ export function shuffle(arr = []) {
 
 export let activePrompt = writable({});
 export let revealState = writable(false);
+export let difficulty = writable('full');

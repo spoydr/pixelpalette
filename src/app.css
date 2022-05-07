@@ -14,3 +14,8 @@ body
     margin: 0;
     padding: 0;
 }
+
+input:checked ~ .dot {
+  transform: translateX(100%);
+  background-color: #fff;
+}

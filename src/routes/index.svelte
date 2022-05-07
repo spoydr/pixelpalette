@@ -2,11 +2,10 @@
     import { paintingsData } from '../data.js';
     import Guessbutton from '$lib/guessbutton.svelte';
     import Scoreboard from '$lib/scoreboard.svelte';
-    import { activePrompt, revealState } from '../stores.js';
-    import { score, shuffle } from '../stores';
+    import DifficultyToggle from '$lib/difficultytoggle.svelte';
+    import { score, highScore, shuffle, activePrompt, revealState, difficulty } from '../stores.js';
     import Gtag from '$lib/gtag.svelte';
     import Nextbutton from '$lib/nextbutton.svelte';
-
 
     // shuffle the array of paintings in a random order
     let shuffledPaintings = shuffle([...paintingsData]);
@@ -38,7 +37,7 @@
         }
         correctAnswer = chosenPaintings[0];
         scrambledAnswers = shuffle([...chosenPaintings]);
-        paintingPromptPath = `./img/pixelated_full/${correctAnswer.id}.jpeg`;
+        paintingPromptPath = `./img/pixelated_${$difficulty}/${correctAnswer.id}.jpeg`;
         revealedPaintingPath = `./img/${correctAnswer.id}.jpeg`;
 
         let currentPrompt = {
@@ -55,7 +54,7 @@
 
     let correctAnswer = $activePrompt.correctAnswer;
 
-    $: paintingPromptPath = `./img/pixelated_full/${correctAnswer.id}.jpg`;
+    $: paintingPromptPath = `./img/pixelated_${$difficulty}/${correctAnswer.id}.jpg`;
     $: revealedPaintingPath = `./img/${correctAnswer.id}.jpg`;
 
     // GUESS HANDLER LOGIC
@@ -69,6 +68,10 @@
             console.log('uh oh. back to art school with you.');
             score.set(0);
         }
+
+        if ($score > $highScore) { // if current score is higher than previous highscore, update highscore
+                highScore.set($score);
+            }
         paintingPromptPath = revealedPaintingPath;
     }
 
@@ -104,7 +107,7 @@
             <div class="h-[10%] flex justify-center">
                 {#if $revealState}
                     <button on:click={newPrompt} class="w-10 h-10 transition-colors duration-150 rounded-full focus:shadow-outline font-bold shadow-md hover:bg-yellow-200 border-black border-2">></button>
-    
+                {:else}
                 {/if}
             </div>
         </div>
