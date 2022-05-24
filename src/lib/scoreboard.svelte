@@ -10,8 +10,8 @@
 <div class="flex flex-col">
     {#key $score}
         <div class="text-sm font-sans text-white flex flex-row justify-between md:w-[12%]">
-            <span class="font-bold pr-2">Score:</span>
-            <div in:fly={{ y: -20 }}>{$score}</div>
+            <span class="font-bold pr-2">Score:</span> 
+            <div in:fly={{ y: -20 }}>{$score}</div> 
         </div>
     {/key}
     {#key $highScore}

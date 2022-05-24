@@ -1,13 +1,12 @@
 <script>
     import { afterUpdate } from 'svelte';
     export let scrambledAnswer = {};
-    import { score } from '../stores';
     import { activePrompt } from '../stores.js';
     import { revealState } from '../stores.js';
 
     let buttonColor = 'bg-white';
 
-    export const assignRevealColor = () => {
+    export const assignRevealColor = () => { // changes button color to green if correct, red if false
         if (scrambledAnswer === $activePrompt.correctAnswer) {
             buttonColor = 'bg-green-200';
         }

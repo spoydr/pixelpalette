@@ -2,10 +2,7 @@
     import { paintingsData } from '../data.js';
     import Guessbutton from '$lib/guessbutton.svelte';
     import Scoreboard from '$lib/scoreboard.svelte';
-    import DifficultyToggle from '$lib/difficultytoggle.svelte';
     import { score, highScore, shuffle, activePrompt, revealState, difficulty } from '../stores.js';
-    import Gtag from '$lib/gtag.svelte';
-    import Nextbutton from '$lib/nextbutton.svelte';
 
     // shuffle the array of paintings in a random order
     let shuffledPaintings = shuffle([...paintingsData]);
@@ -14,17 +11,14 @@
     let chosenPaintings = [...(shuffledPaintings.slice(0,3))];
     let scrambledAnswers = shuffle([...chosenPaintings]); //create new array of answer options in random order (for guess buttons)
 
-    // store the 4 answer options in a global variable, marking the first one as the correct answer.
+    // store the correct answer in a global variable
     let currentPrompt = {
-        option1 : chosenPaintings[0],
-        option2 : chosenPaintings[1],
-        option3 : chosenPaintings[2],
         correctAnswer : chosenPaintings[0]
     };
 
     activePrompt.set(currentPrompt);
 
-    const newPrompt = () => {
+    const newPrompt = () => { // reshuffles remaining paintings and picks a new painting
         if(shuffledPaintings.length > 3) {
             shuffledPaintings.shift();
             shuffledPaintings = shuffle([...shuffledPaintings]);
@@ -41,9 +35,6 @@
         revealedPaintingPath = `./img/${correctAnswer.id}.jpeg`;
 
         let currentPrompt = {
-        option1 : chosenPaintings[0],
-        option2 : chosenPaintings[1],
-        option3 : chosenPaintings[2],
         correctAnswer : chosenPaintings[0]
         };
 
@@ -77,7 +68,6 @@
 
 </script>
 
-<Gtag />
 <div class="wrapper md:bg-neutral-600 md:flex md:justify-center md:w-screen md:px-[20%]">
     <div class="index flex flex-col items-center h-screen w-full">
         <div class="header h-[8%] sm:h-20 w-full flex items-center justify-between px-[10%] bg-black">
@@ -107,7 +97,6 @@
             <div class="h-[10%] flex justify-center">
                 {#if $revealState}
                     <button on:click={newPrompt} class="w-10 h-10 transition-colors duration-150 rounded-full focus:shadow-outline font-bold shadow-md hover:bg-yellow-200 border-black border-2">></button>
-                {:else}
                 {/if}
             </div>
         </div>

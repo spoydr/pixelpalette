@@ -1,4 +1,6 @@
-<script>
+<!-- A currently unimplemented difficulty toggle that allows the user to toggle 'easy mode', with more detailed paintings -->
+
+<script> 
     import { difficulty } from "../stores";
 
     $: difficulty;
